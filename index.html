@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2048</title>
+    <script src="js/pixi.js"></script>
+</head>
+
+<body>
+    <script>
+
+
+
+
+        let keys = {};
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+
+        let cubs = [4][4];
+        //newGame();
+
+        let board = new PIXI.Graphics();
+        board.beginFill(0xffffff);
+        board.lineStyle(2, 0xaaaa)
+        board.drawRoundedRect(w / 3.2, h / 6, w / 3.6, h / 1.66, 10);
+        board.endFill();
+        board.interactive = true;
+        board.buttonMode = true;
+
+        var imgs = ["images/2.png", "images/4.png", "images/8.png", "images/16.png", "images/32.png", "images/64.png", "images/128.png", "images/256.png"];
+        var areaX = [w / 3.2, w / 3.2 + 95 * 2, w / 3.2 + 95 * 3, w / 3.2 + 95 * 4];
+        var areaY = [h / 6, h / 6 + 95 * 1];
+
+        var areaXY = [w / 3.2, w / 3.2 + 95 * 2, w / 3.2 + 95 * 3, w / 3.2 + 95 * 4]
+        [h / 6, h / 6 + 95 * 2, h / 6 + 95 * 3, h / 6 + 95 * 4];
+        areaXY[1][1] = 10;
+        newGame();
+
+
+        var num2 = new PIXI.Sprite.from("images/2.png");
+        num2.x = w / 3.2;
+        num2.y = h / 6;
+        num2.interactive = true;
+        num2.visible = true;
+
+
+        window.onload = function () {
+            const app = new PIXI.Application({
+                width: window.innerWidth,
+                height: window.innerHeight,
+                backgroundColor: 0xfffaaf,
+                resolution: window.devicePixelRatio || 1,
+            });
+
+            document.querySelector("#gameDiv").appendChild(app.view);
+            app.stage.interactive = true;
+
+            app.stage.addChild(board);
+
+            //      NUMBERS
+            app.stage.addChild(num2);
+            window.addEventListener("keydown", keysdown);
+            window.addEventListener("keyup", keysup);
+
+            keysDiv = document.querySelector("#keys");
+            document.body.appendChild(app.view);
+        }
+
+        //newGame();
+
+
+
+        function newGame() {
+            for (let i = 0; i < 4; i++) {
+                for (let j = 0; j < 4; j++) {
+                    //areaXY[i][j].isPosible = true;
+                }
+            }
+        }
+        function just() {
+            for (let i = 0; i < 4; i++) {
+                for (let j = 0; j < 4; j++) {
+                    let num4 = new PIXI.Sprite.from(imgs[j + i]);
+                    num4.x = w / 3.2 + 95 * i;
+                    num4.y = h / 6 + 95 * j;
+                    app.stage.addChild(num4);
+                }
+
+            }
+        }
+        function gameLoop() {
+
+
+
+        }
+        function goLeft() {
+            num2.x -= 95;
+            app.stage.addChild(num2);
+            console.log((w / 3.2) - (w / 3.2 + 95 * 2));
+            for (let i = 0; i < 4; i++) {
+                for (let j = 0; j < 4; i++) {
+
+                }
+            }
+        }
+        function goRight() {
+            num2.x += 190;
+        }
+        function keysdown(e) {
+
+            keys[e.keyCode] = true;
+        }
+        function keysup(e) {
+            console.log(keys);
+            if (keys["68"]) {
+                console.log("keys are working!");
+                num2.x += 95;
+                //goRight();
+            }
+            if (keys["65"]) {
+                console.log("keys are working!");
+                goLeft();
+            }
+            keys[e.keyCode] = false;
+        }
+
+    </script>
+
+</body>
+<div id="gameDiv">
+
+</div>
+
+</html>
